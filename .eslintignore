@@ -9,3 +9,4 @@ src/*.d.ts
 src/.next
 src/*.js
 src/*.json
+src/common/global.type.ts
