@@ -1,6 +1,6 @@
 {
   "name": "next-yami",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -25,6 +25,7 @@
     "react": "~16.13.1",
     "react-dom": "~16.13.1",
     "react-i18next": "^11.3.4",
+    "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "tailwindcss": "^1.2.0",
