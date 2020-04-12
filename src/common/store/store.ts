@@ -7,4 +7,5 @@ interface Options {
     initialState?: any
 }
 
-export const initStore = (options?: Options) => createStore(reducer, options?.initialState, devToolsEnhancer({}))
+export const initStore = (options?: Options) =>
+    createStore(reducer, options?.initialState, devToolsEnhancer({}))
