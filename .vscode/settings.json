@@ -1,0 +1,22 @@
+{
+    "[javascript]": {
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        }
+    },
+    "[typescriptreact]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        }
+    },
+    "[markdown]": {
+        "editor.formatOnSave": false
+    },
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "headwind.runOnSave": true
+}

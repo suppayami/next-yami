@@ -1,0 +1,16 @@
+{
+    "presets": [
+        [
+            "next/babel",
+            {
+                "targets": ">0.25%, not ie 11, not op_mini all"
+            }
+        ]
+    ],
+    "plugins": ["graphql-tag", "@babel/plugin-proposal-optional-chaining", "@babel/plugin-proposal-nullish-coalescing-operator"],
+    "env": {
+        "test": {
+            "plugins": ["babel-plugin-dynamic-import-node"]
+        }
+    }
+}

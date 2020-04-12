@@ -1,0 +1,11 @@
+.vscode
+.next
+node_modules
+gql-types
+out
+scripts
+*.js
+src/*.d.ts
+src/.next
+src/*.js
+src/*.json
