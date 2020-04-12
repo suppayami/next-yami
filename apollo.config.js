@@ -1,8 +1,8 @@
 module.exports = {
     client: {
         service: {
-            name: 'dantruyen',
-            url: 'https://dantruyenelixirstaging.herokuapp.com/graphql',
+            name: 'MockAPI',
+            url: 'https://fakeql.com/graphql/732522e85927e17100352bd1baabf52a',
         },
     },
 }
