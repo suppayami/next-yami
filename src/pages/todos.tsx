@@ -1,17 +1,18 @@
-import React from 'react'
+import * as React from 'react'
 import { useQuery } from '@apollo/client'
 import Head from 'next/head'
 
 import { TodosQuery } from '@/modules/playground/api/todos.graphql'
 import { Todos } from '@/modules/playground/api/gql-types/Todos'
-import { Layout } from '@/modules/playground/layout.component'
+import { PlaygroundLayout } from '@/layouts/layout.component'
+import { LayoutPage } from '@/types'
 
-const TodosPage = () => {
+const TodosPage: LayoutPage = () => {
     const { data, loading, error } = useQuery<Todos>(TodosQuery)
 
     if (error) {
         return (
-            <Layout>
+            <React.Fragment>
                 <Head>
                     <title>Error</title>
                 </Head>
@@ -19,13 +20,13 @@ const TodosPage = () => {
                     <h1 className="text-4xl">Error</h1>
                     <h5 className="tracking-widest text-gray-600 uppercase">Có lỗi nha cưng</h5>
                 </div>
-            </Layout>
+            </React.Fragment>
         )
     }
 
     if (loading) {
         return (
-            <Layout>
+            <React.Fragment>
                 <Head>
                     <title>Loading</title>
                 </Head>
@@ -33,12 +34,12 @@ const TodosPage = () => {
                     <h1 className="text-4xl">Loading</h1>
                     <h5 className="tracking-widest text-gray-600 uppercase">Chờ tí nha cưng</h5>
                 </div>
-            </Layout>
+            </React.Fragment>
         )
     }
 
     return (
-        <Layout>
+        <React.Fragment>
             <Head>
                 <title>Todo List</title>
             </Head>
@@ -52,9 +53,11 @@ const TodosPage = () => {
                     ))}
                 </ul>
             </div>
-        </Layout>
+        </React.Fragment>
     )
 }
 
 // eslint-disable-next-line import/no-default-export
 export default TodosPage
+
+TodosPage.layout = PlaygroundLayout
