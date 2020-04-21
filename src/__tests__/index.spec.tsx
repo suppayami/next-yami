@@ -2,8 +2,7 @@ import * as React from 'react'
 
 import { render } from '@/test-utils'
 import { i18n } from '@/common/i18n/i18n'
-
-import Home from '..'
+import Home from '@/pages/index'
 
 test('should render index page', async () => {
     const { findByText } = render(<Home />)
