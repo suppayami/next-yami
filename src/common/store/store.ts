@@ -1,11 +1,19 @@
-import { createStore } from 'redux'
-import { devToolsEnhancer } from 'redux-devtools-extension'
+import * as React from 'react'
+import { configure } from 'mobx'
 
-import { reducer } from './reducer'
+import 'mobx-react-lite/batchingForReactDom'
 
-interface Options {
-    initialState?: any
+import { makeSessionStore, SessionStore } from '@/modules/session/store/session.store'
+
+configure({ enforceActions: 'always' })
+
+export interface Store {
+    sessionStore: SessionStore
 }
 
-export const initStore = (options?: Options) =>
-    createStore(reducer, options?.initialState, devToolsEnhancer({}))
+export const makeStore = (initialState?: Partial<Store>): Store => ({
+    sessionStore: makeSessionStore(initialState?.sessionStore),
+})
+
+export const StoreContext = React.createContext<Store>(makeStore())
+StoreContext.displayName = 'StoreContext'
