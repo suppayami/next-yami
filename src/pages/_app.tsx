@@ -16,18 +16,17 @@ import { makeStore, StoreContext } from '@/common/store/store'
 export default function App({ Component, pageProps }: AppProps) {
     const { initialState, apolloState } = pageProps
 
-    const apolloClient = React.useMemo(
-        () => initApolloClient({ apiEndpoint: '/api/graphql', initialState: apolloState }),
-        [apolloState],
+    const apolloClientRef = React.useRef(
+        initApolloClient({ apiEndpoint: '/api/graphql', initialState: apolloState }),
     )
-    const store = React.useMemo(() => makeStore(initialState), [initialState])
+    const storeRef = React.useRef(makeStore(initialState))
     const LayoutedComponent = Component as LayoutPage
     const Layout = LayoutedComponent.layout ?? React.Fragment
 
     return (
         <I18nextProvider i18n={i18n}>
-            <ApolloProvider client={apolloClient}>
-                <StoreContext.Provider value={store}>
+            <ApolloProvider client={apolloClientRef.current}>
+                <StoreContext.Provider value={storeRef.current}>
                     <Layout>
                         <Head>
                             <title>{Config.siteName}</title>

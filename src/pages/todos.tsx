@@ -6,7 +6,7 @@ import { TodosQuery } from '@/modules/playground/api/todos.graphql'
 import { Todos } from '@/modules/playground/api/gql-types/Todos'
 import { PlaygroundLayout } from '@/layouts/layout.component'
 import { LayoutPage } from '@/types'
-import { initApolloClient } from '@/common/service/apollo'
+import { getInitialApolloState } from '@/ssr/apollo_state.ssr'
 
 const TodosPage: LayoutPage = () => {
     const { data, loading, error } = useQuery<Todos>(TodosQuery)
@@ -68,8 +68,8 @@ TodosPage.getInitialProps = async () => {
         return {}
     }
 
-    const apollo = initApolloClient({ apiEndpoint: 'http://localhost:3000/api/graphql', ssr: true })
-    await apollo.query({ query: TodosQuery })
-
-    return { apolloState: apollo.cache.extract() }
+    return getInitialApolloState(async (apollo) => {
+        await apollo.query({ query: TodosQuery })
+        return apollo
+    })({})
 }
