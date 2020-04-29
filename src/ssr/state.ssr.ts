@@ -27,7 +27,14 @@ export const getInitialState = (context: NextPageContext) => (
         ssr: true,
     })
     const store = makeStore()
-    await constructor({ apollo, store })
+
+    try {
+        await constructor({ apollo, store })
+    } catch (error) {
+        // Catch error so that server won't crash
+        console.error(error)
+        // TODO: Notify to bugs tracker
+    }
 
     return Promise.resolve(props).then((props) => ({
         ...props,
