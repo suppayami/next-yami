@@ -24,6 +24,7 @@ Personal template, it's a PITA to setup a frontend project.
 - Use `isBrowser()` and `isServer()` to check if the AppTree is rendered in browser or server
 - Use `getInitialState()` to get initial state for application (MobX Store) and for Apollo Client
 - See `src/pages/todos.tsx` for example
+- (Optional) Call `await apolloAuthorization(apollo)` in state constructor to put Authorization Token into Apollo Client
 
 ## Example GraphQL API
 The example GraphQL API in this template is served by [FakeQL](https://fakeql.com/)
