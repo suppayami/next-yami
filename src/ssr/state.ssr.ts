@@ -36,9 +36,9 @@ export const getInitialState = (context: NextPageContext) => (
         // TODO: Notify to bugs tracker
     }
 
-    return Promise.resolve(props).then((props) => ({
-        ...props,
+    return {
+        ...(await props),
         apolloState: apollo.cache.extract(),
         initialState: toJS(store),
-    }))
+    }
 }
