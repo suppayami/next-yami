@@ -5,8 +5,9 @@ import { makeRenewSessionLink } from './renew_session.link'
 import { makeAuthLink } from './auth.link'
 
 interface Options {
-    apiEnpoint?: string
+    apiEndpoint?: string
     initialState?: any
+    ssr?: boolean
 }
 
 export const initApolloClient = (options?: Options) =>
@@ -14,6 +15,8 @@ export const initApolloClient = (options?: Options) =>
         cache: new InMemoryCache({ addTypename: true }).restore(options?.initialState ?? {}),
         link: makeRenewSessionLink()
             .concat(makeAuthLink())
-            .concat(makeHttpLink({ uri: options?.apiEnpoint })),
+            .concat(makeHttpLink({ uri: options?.apiEndpoint })),
         connectToDevTools: true,
+        ssrMode: !!options?.ssr,
+        ssrForceFetchDelay: options?.ssr ? 100 : 0, // magic number!
     })

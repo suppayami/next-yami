@@ -14,8 +14,13 @@ import { makeStore, StoreContext } from '@/common/store/store'
 
 // eslint-disable-next-line import/no-default-export
 export default function App({ Component, pageProps }: AppProps) {
-    const apolloClient = React.useMemo(() => initApolloClient({ apiEnpoint: '/api/graphql' }), [])
-    const store = React.useMemo(() => makeStore(), [])
+    const { initialState, apolloState } = pageProps
+
+    const apolloClient = React.useMemo(
+        () => initApolloClient({ apiEndpoint: '/api/graphql', initialState: apolloState }),
+        [apolloState],
+    )
+    const store = React.useMemo(() => makeStore(initialState), [initialState])
     const LayoutedComponent = Component as LayoutPage
     const Layout = LayoutedComponent.layout ?? React.Fragment
 
