@@ -26,12 +26,7 @@ export default Home
 Home.layout = PlaygroundLayout
 
 Home.getInitialProps = async () => {
-    if (typeof window !== 'undefined') {
-        return {}
-    }
-
     return getInitialAppState(async (store) => {
         await store.sessionStore.authenticate({ username: 'Yami' })
-        return store
     })({})
 }

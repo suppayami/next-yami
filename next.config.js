@@ -6,7 +6,7 @@ module.exports = {
             return [
                 {
                     source: '/api/graphql',
-                    destination: 'https://fakeql.com/graphql/dd9d96f3a7fb35c5d0a7ba122ae66fe5',
+                    destination: 'https://fakeql.com/graphql/50b00b286343f454e93504e5df822d98',
                 },
             ]
         },

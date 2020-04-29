@@ -18,5 +18,5 @@ export const initApolloClient = (options?: Options) =>
             .concat(makeHttpLink({ uri: options?.apiEndpoint })),
         connectToDevTools: true,
         ssrMode: !!options?.ssr,
-        ssrForceFetchDelay: options?.ssr ? 100 : 0, // magic number!
+        ssrForceFetchDelay: 100, // magic number!
     })

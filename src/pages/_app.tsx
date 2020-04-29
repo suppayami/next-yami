@@ -11,13 +11,18 @@ import { i18n } from '@/common/i18n/i18n'
 import { LayoutPage } from '@/types'
 import { Config } from '@/common/config'
 import { makeStore, StoreContext } from '@/common/store/store'
+import { isServer } from '@/ssr/is_platform.ssr'
 
 // eslint-disable-next-line import/no-default-export
 export default function App({ Component, pageProps }: AppProps) {
     const { initialState, apolloState } = pageProps
 
     const apolloClientRef = React.useRef(
-        initApolloClient({ apiEndpoint: '/api/graphql', initialState: apolloState }),
+        initApolloClient({
+            apiEndpoint: '/api/graphql',
+            initialState: apolloState,
+            ssr: isServer(),
+        }),
     )
     const storeRef = React.useRef(makeStore(initialState))
     const LayoutedComponent = Component as LayoutPage

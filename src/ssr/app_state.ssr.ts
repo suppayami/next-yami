@@ -1,10 +1,17 @@
 import { Store, makeStore } from '@/common/store/store'
 
-type AppStateConstructor = (store: Store) => Promise<Store>
+import { isBrowser } from './is_platform.ssr'
+
+type AppStateConstructor = (store: Store) => Promise<void>
 
 export const getInitialAppState = (constructor: AppStateConstructor) => async <T>(
     props: Promise<T> | T,
 ) => {
-    const store = await constructor(makeStore())
+    if (isBrowser()) {
+        return props
+    }
+
+    const store = makeStore()
+    await constructor(store)
     return Promise.resolve(props).then((props) => ({ ...props, initialState: store }))
 }

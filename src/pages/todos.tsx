@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useQuery } from '@apollo/client'
 import Head from 'next/head'
+import Link from 'next/link'
 
 import { TodosQuery } from '@/modules/playground/api/todos.graphql'
 import { Todos } from '@/modules/playground/api/gql-types/Todos'
@@ -9,7 +10,9 @@ import { LayoutPage } from '@/types'
 import { getInitialApolloState } from '@/ssr/apollo_state.ssr'
 
 const TodosPage: LayoutPage = () => {
-    const { data, loading, error } = useQuery<Todos>(TodosQuery)
+    const { data, loading, error } = useQuery<Todos>(TodosQuery, {
+        fetchPolicy: 'cache-and-network',
+    })
 
     if (error) {
         return (
@@ -45,6 +48,9 @@ const TodosPage: LayoutPage = () => {
                 <title>Todo List</title>
             </Head>
             <div className="w-full h-64 overflow-auto">
+                <Link href="/" as="/">
+                    <a href="/">Index</a>
+                </Link>
                 <h1 className="text-4xl text-center">Todos</h1>
                 <ul className="list-disc list-inside">
                     {data?.todos?.map((todo) => (
@@ -64,12 +70,7 @@ export default TodosPage
 TodosPage.layout = PlaygroundLayout
 
 TodosPage.getInitialProps = async () => {
-    if (typeof window !== 'undefined') {
-        return {}
-    }
-
     return getInitialApolloState(async (apollo) => {
         await apollo.query({ query: TodosQuery })
-        return apollo
     })({})
 }
