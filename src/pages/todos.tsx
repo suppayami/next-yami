@@ -7,7 +7,8 @@ import { TodosQuery } from '@/modules/playground/api/todos.graphql'
 import { Todos } from '@/modules/playground/api/gql-types/Todos'
 import { PlaygroundLayout } from '@/layouts/layout.component'
 import { LayoutPage } from '@/types'
-import { getInitialApolloState } from '@/ssr/apollo_state.ssr'
+import { getInitialState } from '@/ssr/state.ssr'
+import { apolloAuthorization } from '@/ssr/apollo_authorization.ssr'
 
 const TodosPage: LayoutPage = ({ apolloState }) => {
     const { data, loading, error } = useQuery<Todos>(TodosQuery, {
@@ -69,8 +70,12 @@ export default TodosPage
 
 TodosPage.layout = PlaygroundLayout
 
-TodosPage.getInitialProps = async () => {
-    return getInitialApolloState(async (apollo) => {
-        await apollo.query({ query: TodosQuery })
+TodosPage.getInitialProps = async (context) => {
+    return getInitialState(context)(async ({ apollo, store }) => {
+        await apolloAuthorization(apollo)
+        await apollo.query({
+            query: TodosQuery,
+        })
+        await store.sessionStore.authenticate({ username: 'Yami' })
     })({})
 }

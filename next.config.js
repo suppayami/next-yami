@@ -6,6 +6,7 @@ module.exports = {
             return [
                 {
                     source: '/api/graphql',
+                    // TODO: Change API Endpoint
                     destination: 'https://fakeql.com/graphql/50b00b286343f454e93504e5df822d98',
                 },
             ]

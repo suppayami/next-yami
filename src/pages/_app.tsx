@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
     const apolloClientRef = React.useRef(
         initApolloClient({
-            apiEndpoint: '/api/graphql',
+            apiEndpoint: `${Config.siteUrl}${Config.apiEndpoint}`,
             initialState: apolloState,
             ssr: isServer(),
         }),

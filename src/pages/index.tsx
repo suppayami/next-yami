@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { HelloWorld } from '@/modules/playground/hello_world.component'
 import { PlaygroundLayout } from '@/layouts/layout.component'
 import { LayoutPage } from '@/types'
-import { getInitialAppState } from '@/ssr/app_state.ssr'
+import { getInitialState } from '@/ssr/state.ssr'
 
 const Home: LayoutPage = () => {
     const [commonTranslate] = useTranslation('common')
@@ -25,8 +25,8 @@ export default Home
 
 Home.layout = PlaygroundLayout
 
-Home.getInitialProps = async () => {
-    return getInitialAppState(async (store) => {
+Home.getInitialProps = async (context) => {
+    return getInitialState(context)(async ({ store }) => {
         await store.sessionStore.authenticate({ username: 'Yami' })
     })({})
 }
