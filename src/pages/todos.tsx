@@ -9,7 +9,7 @@ import { PlaygroundLayout } from '@/layouts/layout.component'
 import { LayoutPage } from '@/types'
 import { getInitialApolloState } from '@/ssr/apollo_state.ssr'
 
-const TodosPage: LayoutPage = () => {
+const TodosPage: LayoutPage = ({ apolloState }) => {
     const { data, loading, error } = useQuery<Todos>(TodosQuery, {
         fetchPolicy: 'cache-and-network',
     })
@@ -28,7 +28,7 @@ const TodosPage: LayoutPage = () => {
         )
     }
 
-    if (loading) {
+    if (loading && !apolloState) {
         return (
             <React.Fragment>
                 <Head>
