@@ -17,21 +17,23 @@ import { isServer } from '@/ssr/is_platform.ssr'
 export default function App({ Component, pageProps }: AppProps) {
     const { initialState, apolloState } = pageProps
 
-    const apolloClientRef = React.useRef(
+    const [apolloClient] = React.useState(() =>
         initApolloClient({
             apiEndpoint: `${Config.siteUrl}${Config.apiEndpoint}`,
             initialState: apolloState,
             ssr: isServer(),
         }),
     )
-    const storeRef = React.useRef(makeStore(initialState))
+
+    const [store] = React.useState(() => makeStore(initialState))
+
     const LayoutedComponent = Component as LayoutPage
     const Layout = LayoutedComponent.layout ?? React.Fragment
 
     return (
         <I18nextProvider i18n={i18n}>
-            <ApolloProvider client={apolloClientRef.current}>
-                <StoreContext.Provider value={storeRef.current}>
+            <ApolloProvider client={apolloClient}>
+                <StoreContext.Provider value={store}>
                     <Layout>
                         <Head>
                             <title>{Config.siteName}</title>
