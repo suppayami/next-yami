@@ -25,6 +25,7 @@
     "next": "~10.0.0",
     "react": "~17.0.0",
     "react-dom": "~17.0.0",
+    "react-hook-form": "^6.12.1",
     "react-i18next": "~11.7.0",
     "tailwindcss": "~2.0.0"
   },
