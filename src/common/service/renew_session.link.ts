@@ -1,4 +1,4 @@
-import { onError } from '@apollo/link-error'
+import { onError } from '@apollo/client/link/error'
 import { GraphQLError } from 'graphql'
 import { Observable, ApolloError } from '@apollo/client'
 

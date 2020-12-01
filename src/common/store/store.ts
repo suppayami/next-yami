@@ -1,8 +1,6 @@
 import * as React from 'react'
 import { configure } from 'mobx'
 
-import 'mobx-react-lite/batchingForReactDom'
-
 import { makeSessionStore, SessionStore } from '@/modules/session/store/session.store'
 
 configure({ enforceActions: 'always' })

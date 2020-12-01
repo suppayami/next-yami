@@ -8,6 +8,6 @@ type LayoutPageProps = {
     apolloState?: any
 }
 
-export type LayoutPage<P = {}, IP = P> = NextPage<P & LayoutPageProps, IP> & {
+export type LayoutPage<P = Record<string, never>, IP = P> = NextPage<P & LayoutPageProps, IP> & {
     layout?: ComponentType
 }

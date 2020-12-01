@@ -3,7 +3,7 @@ module.exports = {
         service: {
             // TODO: Change API Endpoint
             name: 'MockAPI',
-            url: 'https://fakeql.com/graphql/732522e85927e17100352bd1baabf52a',
+            url: 'https://fakeql.com/graphql/b80d41f34d70d05989ad22ff063a0709',
         },
     },
 }
